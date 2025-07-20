@@ -1,642 +1,1403 @@
 <!DOCTYPE html>
 
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benil Jenish Mon Portfolio</title>
-  <style>
-    /* Import Montserrat font */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benil Jenish Mon Portfolio</title>
+    <style>
+      /* Import Montserrat font */
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
-    /* Loading Screen Container */
-    .loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #fff;
-      z-index: 9999;
-      overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
-      text-align: center;
-      animation: autoHideScreen 9s ease-in-out forwards;
-    }
-
-    @keyframes autoHideScreen {
-      0%, 88% { 
-        opacity: 1; 
-        visibility: visible; 
-        pointer-events: auto;
+      /* Loading Screen Container */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+        z-index: 9999;
+        overflow: hidden;
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+        animation: autoHideScreen 9s ease-in-out forwards;
       }
-      100% { 
-        opacity: 0; 
-        visibility: hidden; 
-        pointer-events: none;
+
+      @keyframes autoHideScreen {
+        0%,
+        88% {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+        100% {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+        }
       }
-    }
 
-    /* Animation container */
-    .criterion {
-      font-size: 1.6rem;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      height: 0;
-      width: 0;
-      transform: translate(-20px, -20px);
-    }
-
-    /* Background color bars */
-    .background {
-      position: absolute;
-      top: 0;
-      height: 100vh;
-      width: 0;
-      animation: background-animation 3s ease-in-out 4s 1 normal forwards;
-    }
-
-    .background0 { left: 0%; background-color: hsl(0, 80%, 60%); }
-    .background1 { left: 12.5%; background-color: hsl(45, 80%, 60%); }
-    .background2 { left: 25%; background-color: hsl(90, 80%, 60%); }
-    .background3 { left: 37.5%; background-color: hsl(135, 80%, 60%); }
-    .background4 { left: 50%; background-color: hsl(180, 80%, 60%); }
-    .background5 { left: 62.5%; background-color: hsl(225, 80%, 60%); }
-    .background6 { left: 75%; background-color: hsl(270, 80%, 60%); }
-    .background7 { left: 87.5%; background-color: hsl(315, 80%, 60%); }
-
-    @keyframes background-animation {
-      0% { width: 0; }
-      50% { width: 12.5%; opacity: 1; }
-      100% { opacity: 0; width: 25%; }
-    }
-
-    /* Text elements */
-    .text {
-      position: absolute;
-      width: 40px;
-      line-height: 40px;
-      opacity: 0;
-      overflow: hidden;
-      font-weight: bold;
-      color: #333;
-      z-index: 10;
-    }
-
-    /* Text positioning */
-    .text0 { left: -140px; top: 0; }
-    .text1 { left: -100px; top: 0; }
-    .text2 { left: -60px; top: 0; }
-    .text3 { left: -20px; top: 0; }
-    .text4 { left: 20px; top: 0; }
-    .text5 { left: 60px; top: 0; }
-    .text6 { left: 100px; top: 0; }
-    .text7 { left: 140px; top: 0; }
-
-    /* Text animations with particle explosion trigger */
-    .text0 { animation: text-animation 1s ease-in-out 1s forwards, text-sparkle 2s ease-in-out 2.5s forwards, text-exit 1s ease-in-out 7s forwards; }
-    .text1 { animation: text-animation 1s ease-in-out 1.2s forwards, text-sparkle 2s ease-in-out 2.7s forwards, text-exit 1s ease-in-out 7.2s forwards; }
-    .text2 { animation: text-animation 1s ease-in-out 1.4s forwards, text-sparkle 2s ease-in-out 2.9s forwards, text-exit 1s ease-in-out 7.4s forwards; }
-    .text3 { animation: text-animation 1s ease-in-out 1.6s forwards, text-sparkle 2s ease-in-out 3.1s forwards, text-exit 1s ease-in-out 7.6s forwards; }
-    .text4 { animation: text-animation 1s ease-in-out 1.8s forwards, text-sparkle 2s ease-in-out 3.3s forwards, text-exit 1s ease-in-out 7.8s forwards; }
-    .text5 { animation: text-animation 1s ease-in-out 2s forwards, text-sparkle 2s ease-in-out 3.5s forwards, text-exit 1s ease-in-out 8s forwards; }
-    .text6 { animation: text-animation 1s ease-in-out 2.2s forwards, text-sparkle 2s ease-in-out 3.7s forwards, text-exit 1s ease-in-out 8.2s forwards; }
-    .text7 { animation: text-animation 1s ease-in-out 2.4s forwards, text-sparkle 2s ease-in-out 3.9s forwards, text-exit-special 2s ease-in-out 8.4s forwards; }
-
-    /* Text scale animations */
-    @keyframes text-animation { 
-      0% { transform: scale(0, 0); opacity: 0; } 
-      50% { transform: scale(3, 3); } 
-      100% { transform: scale(1, 1); opacity: 1; } 
-    }
-
-    /* Text sparkling effect */
-    @keyframes text-sparkle { 
-      0%, 100% { text-shadow: none; } 
-      25% { text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b; } 
-      50% { text-shadow: 0 0 10px #4ecdc4, 0 0 20px #4ecdc4, 0 0 30px #4ecdc4; } 
-      75% { text-shadow: 0 0 10px #45b7d1, 0 0 20px #45b7d1, 0 0 30px #45b7d1; } 
-    }
-
-    /* Text exit animations */
-    @keyframes text-exit { 
-      0% { opacity: 1; transform: scale(1); } 
-      100% { opacity: 0; transform: scale(0.3) translateY(-30px) rotate(180deg); } 
-    }
-
-    @keyframes text-exit-special { 
-      0% { opacity: 1; transform: scale(1); }
-      25% { transform: scale(2) rotate(90deg); }
-      50% { transform: scale(1.5) rotate(180deg); }
-      75% { transform: scale(2.5) rotate(270deg); }
-      100% { opacity: 0; transform: scale(0) rotate(360deg) translateX(500px); }
-    }
-
-    /* Frame bounce effects */
-    .frame {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      opacity: 0;
-    }
-
-    .frame0 { left: -140px; top: 0; background-color: hsl(0, 80%, 60%); animation: frame-animation 1s ease-in-out 0ms forwards; }
-    .frame1 { left: -100px; top: 0; background-color: hsl(45, 80%, 60%); animation: frame-animation 1s ease-in-out 200ms forwards; }
-    .frame2 { left: -60px; top: 0; background-color: hsl(90, 80%, 60%); animation: frame-animation 1s ease-in-out 400ms forwards; }
-    .frame3 { left: -20px; top: 0; background-color: hsl(135, 80%, 60%); animation: frame-animation 1s ease-in-out 600ms forwards; }
-    .frame4 { left: 20px; top: 0; background-color: hsl(180, 80%, 60%); animation: frame-animation 1s ease-in-out 800ms forwards; }
-    .frame5 { left: 60px; top: 0; background-color: hsl(225, 80%, 60%); animation: frame-animation 1s ease-in-out 1000ms forwards; }
-    .frame6 { left: 100px; top: 0; background-color: hsl(270, 80%, 60%); animation: frame-animation 1s ease-in-out 1200ms forwards; }
-    .frame7 { left: 140px; top: 0; background-color: hsl(315, 80%, 60%); animation: frame-animation 1s ease-in-out 1400ms forwards; }
-
-    @keyframes frame-animation {
-      0% { transform: translateY(-500px); opacity: 1; box-shadow: 0 0 20px currentColor; }
-      50% { box-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
-      100% { transform: translateY(0); opacity: 0; }
-    }
-
-    /* COLORFUL PARTICLE EXPLOSION EFFECTS - THE MISSING BOOM! */
-    .particle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      opacity: 0;
-      z-index: 5;
-    }
-
-    /* Create 12 particles per letter for explosive effect */
-    .particle00, .particle01, .particle02, .particle03, .particle04, .particle05, 
-    .particle06, .particle07, .particle08, .particle09, .particle010, .particle011 { 
-      background-color: hsl(0, 80%, 60%); left: -140px; top: 0; 
-    }
-    
-    .particle10, .particle11, .particle12, .particle13, .particle14, .particle15, 
-    .particle16, .particle17, .particle18, .particle19, .particle110, .particle111 { 
-      background-color: hsl(45, 80%, 60%); left: -100px; top: 0; 
-    }
-    
-    .particle20, .particle21, .particle22, .particle23, .particle24, .particle25, 
-    .particle26, .particle27, .particle28, .particle29, .particle210, .particle211 { 
-      background-color: hsl(90, 80%, 60%); left: -60px; top: 0; 
-    }
-    
-    .particle30, .particle31, .particle32, .particle33, .particle34, .particle35, 
-    .particle36, .particle37, .particle38, .particle39, .particle310, .particle311 { 
-      background-color: hsl(135, 80%, 60%); left: -20px; top: 0; 
-    }
-    
-    .particle40, .particle41, .particle42, .particle43, .particle44, .particle45, 
-    .particle46, .particle47, .particle48, .particle49, .particle410, .particle411 { 
-      background-color: hsl(180, 80%, 60%); left: 20px; top: 0; 
-    }
-    
-    .particle50, .particle51, .particle52, .particle53, .particle54, .particle55, 
-    .particle56, .particle57, .particle58, .particle59, .particle510, .particle511 { 
-      background-color: hsl(225, 80%, 60%); left: 60px; top: 0; 
-    }
-    
-    .particle60, .particle61, .particle62, .particle63, .particle64, .particle65, 
-    .particle66, .particle67, .particle68, .particle69, .particle610, .particle611 { 
-      background-color: hsl(270, 80%, 60%); left: 100px; top: 0; 
-    }
-    
-    .particle70, .particle71, .particle72, .particle73, .particle74, .particle75, 
-    .particle76, .particle77, .particle78, .particle79, .particle710, .particle711 { 
-      background-color: hsl(315, 80%, 60%); left: 140px; top: 0; 
-    }
-
-    /* EXPLOSION ANIMATION TIMING - Creates the BOOM effect */
-    .particle00, .particle10, .particle20, .particle30, .particle40, .particle50, .particle60, .particle70 { animation: explode-up 2s ease-out 1.5s forwards; }
-    .particle01, .particle11, .particle21, .particle31, .particle41, .particle51, .particle61, .particle71 { animation: explode-down 2s ease-out 1.6s forwards; }
-    .particle02, .particle12, .particle22, .particle32, .particle42, .particle52, .particle62, .particle72 { animation: explode-left 2s ease-out 1.7s forwards; }
-    .particle03, .particle13, .particle23, .particle33, .particle43, .particle53, .particle63, .particle73 { animation: explode-right 2s ease-out 1.8s forwards; }
-    .particle04, .particle14, .particle24, .particle34, .particle44, .particle54, .particle64, .particle74 { animation: explode-up-left 2s ease-out 1.9s forwards; }
-    .particle05, .particle15, .particle25, .particle35, .particle45, .particle55, .particle65, .particle75 { animation: explode-up-right 2s ease-out 2s forwards; }
-    .particle06, .particle16, .particle26, .particle36, .particle46, .particle56, .particle66, .particle76 { animation: explode-down-left 2s ease-out 2.1s forwards; }
-    .particle07, .particle17, .particle27, .particle37, .particle47, .particle57, .particle67, .particle77 { animation: explode-down-right 2s ease-out 2.2s forwards; }
-    .particle08, .particle18, .particle28, .particle38, .particle48, .particle58, .particle68, .particle78 { animation: explode-spiral 2s ease-out 2.3s forwards; }
-    .particle09, .particle19, .particle29, .particle39, .particle49, .particle59, .particle69, .particle79 { animation: explode-spiral-reverse 2s ease-out 2.4s forwards; }
-    .particle010, .particle110, .particle210, .particle310, .particle410, .particle510, .particle610, .particle710 { animation: explode-bounce 2s ease-out 2.5s forwards; }
-    .particle011, .particle111, .particle211, .particle311, .particle411, .particle511, .particle611, .particle711 { animation: explode-zoom 2s ease-out 2.6s forwards; }
-
-    /* PARTICLE EXPLOSION KEYFRAMES - The spectacular effects! */
-    @keyframes explode-up {
-      0% { opacity: 0; transform: scale(0) translateY(0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translateY(-20px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translateY(-120px) rotate(360deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-down {
-      0% { opacity: 0; transform: scale(0) translateY(0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translateY(20px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translateY(120px) rotate(-360deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-left {
-      0% { opacity: 0; transform: scale(0) translateX(0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translateX(-20px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translateX(-120px) rotate(360deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-right {
-      0% { opacity: 0; transform: scale(0) translateX(0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translateX(20px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translateX(120px) rotate(-360deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-up-left {
-      0% { opacity: 0; transform: scale(0) translate(0, 0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translate(-15px, -15px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translate(-100px, -100px) rotate(270deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-up-right {
-      0% { opacity: 0; transform: scale(0) translate(0, 0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translate(15px, -15px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translate(100px, -100px) rotate(-270deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-down-left {
-      0% { opacity: 0; transform: scale(0) translate(0, 0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translate(-15px, 15px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translate(-100px, 100px) rotate(270deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-down-right {
-      0% { opacity: 0; transform: scale(0) translate(0, 0); box-shadow: 0 0 0 currentColor; }
-      20% { opacity: 1; transform: scale(1.5) translate(15px, 15px); box-shadow: 0 0 15px currentColor; }
-      100% { opacity: 0; transform: scale(0.2) translate(100px, 100px) rotate(-270deg); box-shadow: 0 0 30px currentColor; }
-    }
-
-    @keyframes explode-spiral {
-      0% { opacity: 0; transform: scale(0) rotate(0deg) translate(0px, 0px); }
-      20% { opacity: 1; transform: scale(1.2) rotate(72deg) translate(30px, 0px); }
-      40% { opacity: 0.8; transform: scale(1) rotate(144deg) translate(50px, 0px); }
-      60% { opacity: 0.6; transform: scale(0.8) rotate(216deg) translate(70px, 0px); }
-      80% { opacity: 0.4; transform: scale(0.6) rotate(288deg) translate(90px, 0px); }
-      100% { opacity: 0; transform: scale(0.2) rotate(360deg) translate(120px, 0px); }
-    }
-
-    @keyframes explode-spiral-reverse {
-      0% { opacity: 0; transform: scale(0) rotate(0deg) translate(0px, 0px); }
-      20% { opacity: 1; transform: scale(1.2) rotate(-72deg) translate(-30px, 0px); }
-      40% { opacity: 0.8; transform: scale(1) rotate(-144deg) translate(-50px, 0px); }
-      60% { opacity: 0.6; transform: scale(0.8) rotate(-216deg) translate(-70px, 0px); }
-      80% { opacity: 0.4; transform: scale(0.6) rotate(-288deg) translate(-90px, 0px); }
-      100% { opacity: 0; transform: scale(0.2) rotate(-360deg) translate(-120px, 0px); }
-    }
-
-    @keyframes explode-bounce {
-      0% { opacity: 0; transform: scale(0) translateY(0); }
-      25% { opacity: 1; transform: scale(1.5) translateY(-40px); }
-      50% { opacity: 0.8; transform: scale(1.2) translateY(20px); }
-      75% { opacity: 0.5; transform: scale(0.9) translateY(-60px); }
-      100% { opacity: 0; transform: scale(0.3) translateY(100px); }
-    }
-
-    @keyframes explode-zoom {
-      0% { opacity: 0; transform: scale(0); box-shadow: 0 0 0 currentColor; }
-      10% { opacity: 1; transform: scale(2); box-shadow: 0 0 20px currentColor; }
-      30% { opacity: 0.9; transform: scale(3); box-shadow: 0 0 40px currentColor; }
-      50% { opacity: 0.7; transform: scale(4); box-shadow: 0 0 60px currentColor; }
-      70% { opacity: 0.5; transform: scale(5); box-shadow: 0 0 80px currentColor; }
-      100% { opacity: 0; transform: scale(6); box-shadow: 0 0 100px currentColor; }
-    }
-
-    /* Skip instruction */
-    .skip-text {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #666;
-      font-size: 14px;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
-    }
-
-    /* Main content */
-    .main-content {
-      opacity: 0;
-      display: none;
-      animation: autoShowContent 9s ease-in-out forwards;
-    }
-
-    @keyframes autoShowContent {
-      0%, 88% { 
-        opacity: 0; 
-        display: none; 
+      /* Animation container */
+      .criterion {
+        font-size: 1.6rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 0;
+        width: 0;
+        transform: translate(-20px, -20px);
       }
-      100% { 
-        opacity: 1; 
-        display: block; 
+
+      /* Background color bars */
+      .background {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        width: 0;
+        animation: background-animation 3s ease-in-out 4s 1 normal forwards;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- Loading Animation Screen -->
-  <div class="loading-screen" id="loadingScreen">
-    <!-- Background color bars -->
-    <div class="background background0"></div>
-    <div class="background background1"></div>
-    <div class="background background2"></div>
-    <div class="background background3"></div>
-    <div class="background background4"></div>
-    <div class="background background5"></div>
-    <div class="background background6"></div>
-    <div class="background background7"></div>
-    
-    <!-- Animation container -->
-    <div class="criterion">
-      <!-- Welcome text letters -->
-      <div class="text text0">W</div>
-      <div class="text text1">e</div>
-      <div class="text text2">l</div>
-      <div class="text text3">c</div>
-      <div class="text text4">o</div>
-      <div class="text text5">m</div>
-      <div class="text text6">e</div>
-      <div class="text text7">:)</div>
-      
-      <!-- Frame bounce effects -->
-      <div class="frame frame0"></div>
-      <div class="frame frame1"></div>
-      <div class="frame frame2"></div>
-      <div class="frame frame3"></div>
-      <div class="frame frame4"></div>
-      <div class="frame frame5"></div>
-      <div class="frame frame6"></div>
-      <div class="frame frame7"></div>
-      
-      <!-- COLORFUL PARTICLE EXPLOSION EFFECTS - THE BOOM! -->
-      <!-- W particles -->
-      <div class="particle particle00"></div><div class="particle particle01"></div><div class="particle particle02"></div><div class="particle particle03"></div>
-      <div class="particle particle04"></div><div class="particle particle05"></div><div class="particle particle06"></div><div class="particle particle07"></div>
-      <div class="particle particle08"></div><div class="particle particle09"></div><div class="particle particle010"></div><div class="particle particle011"></div>
-      
-      <!-- e particles -->
-      <div class="particle particle10"></div><div class="particle particle11"></div><div class="particle particle12"></div><div class="particle particle13"></div>
-      <div class="particle particle14"></div><div class="particle particle15"></div><div class="particle particle16"></div><div class="particle particle17"></div>
-      <div class="particle particle18"></div><div class="particle particle19"></div><div class="particle particle110"></div><div class="particle particle111"></div>
-      
-      <!-- l particles -->
-      <div class="particle particle20"></div><div class="particle particle21"></div><div class="particle particle22"></div><div class="particle particle23"></div>
-      <div class="particle particle24"></div><div class="particle particle25"></div><div class="particle particle26"></div><div class="particle particle27"></div>
-      <div class="particle particle28"></div><div class="particle particle29"></div><div class="particle particle210"></div><div class="particle particle211"></div>
-      
-      <!-- c particles -->
-      <div class="particle particle30"></div><div class="particle particle31"></div><div class="particle particle32"></div><div class="particle particle33"></div>
-      <div class="particle particle34"></div><div class="particle particle35"></div><div class="particle particle36"></div><div class="particle particle37"></div>
-      <div class="particle particle38"></div><div class="particle particle39"></div><div class="particle particle310"></div><div class="particle particle311"></div>
-      
-      <!-- o particles -->
-      <div class="particle particle40"></div><div class="particle particle41"></div><div class="particle particle42"></div><div class="particle particle43"></div>
-      <div class="particle particle44"></div><div class="particle particle45"></div><div class="particle particle46"></div><div class="particle particle47"></div>
-      <div class="particle particle48"></div><div class="particle particle49"></div><div class="particle particle410"></div><div class="particle particle411"></div>
-      
-      <!-- m particles -->
-      <div class="particle particle50"></div><div class="particle particle51"></div><div class="particle particle52"></div><div class="particle particle53"></div>
-      <div class="particle particle54"></div><div class="particle particle55"></div><div class="particle particle56"></div><div class="particle particle57"></div>
-      <div class="particle particle58"></div><div class="particle particle59"></div><div class="particle particle510"></div><div class="particle particle511"></div>
-      
-      <!-- e particles -->
-      <div class="particle particle60"></div><div class="particle particle61"></div><div class="particle particle62"></div><div class="particle particle63"></div>
-      <div class="particle particle64"></div><div class="particle particle65"></div><div class="particle particle66"></div><div class="particle particle67"></div>
-      <div class="particle particle68"></div><div class="particle particle69"></div><div class="particle particle610"></div><div class="particle particle611"></div>
-      
-      <!-- :) particles -->
-      <div class="particle particle70"></div><div class="particle particle71"></div><div class="particle particle72"></div><div class="particle particle73"></div>
-      <div class="particle particle74"></div><div class="particle particle75"></div><div class="particle particle76"></div><div class="particle particle77"></div>
-      <div class="particle particle78"></div><div class="particle particle79"></div><div class="particle particle710"></div><div class="particle particle711"></div>
-    </div>
-    
-    
-  </div>
+      .background0 {
+        left: 0%;
+        background-color: hsl(0, 80%, 60%);
+      }
+      .background1 {
+        left: 12.5%;
+        background-color: hsl(45, 80%, 60%);
+      }
+      .background2 {
+        left: 25%;
+        background-color: hsl(90, 80%, 60%);
+      }
+      .background3 {
+        left: 37.5%;
+        background-color: hsl(135, 80%, 60%);
+      }
+      .background4 {
+        left: 50%;
+        background-color: hsl(180, 80%, 60%);
+      }
+      .background5 {
+        left: 62.5%;
+        background-color: hsl(225, 80%, 60%);
+      }
+      .background6 {
+        left: 75%;
+        background-color: hsl(270, 80%, 60%);
+      }
+      .background7 {
+        left: 87.5%;
+        background-color: hsl(315, 80%, 60%);
+      }
 
+      @keyframes background-animation {
+        0% {
+          width: 0;
+        }
+        50% {
+          width: 12.5%;
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          width: 25%;
+        }
+      }
 
+      /* Text elements */
+      .text {
+        position: absolute;
+        width: 40px;
+        line-height: 40px;
+        opacity: 0;
+        overflow: hidden;
+        font-weight: bold;
+        color: #333;
+        z-index: 10;
+      }
 
+      /* Text positioning */
+      .text0 {
+        left: -140px;
+        top: 0;
+      }
+      .text1 {
+        left: -100px;
+        top: 0;
+      }
+      .text2 {
+        left: -60px;
+        top: 0;
+      }
+      .text3 {
+        left: -20px;
+        top: 0;
+      }
+      .text4 {
+        left: 20px;
+        top: 0;
+      }
+      .text5 {
+        left: 60px;
+        top: 0;
+      }
+      .text6 {
+        left: 100px;
+        top: 0;
+      }
+      .text7 {
+        left: 140px;
+        top: 0;
+      }
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Page Title</title>
-  <style>
-    /* 1) Reset body/html */
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* hide scrollbars if desired */
-    }
-    /* 2) Full-screen SVG background */
-    #bg-wrap {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: -1;             /* behind everything */
-      pointer-events: none;    /* clicks pass through */
-    }
-    #bg-wrap svg {
-      width: 100%; height: 100%;
-      display: block;
-    }
-    /* 3) Foreground content container */
-    #content-wrap {
-      position: relative;
-      z-index: 1;
-      /* optional: scroll if content overflows */
-      overflow: auto;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-</head>
-<body>
+      /* Text animations with particle explosion trigger */
+      .text0 {
+        animation: text-animation 1s ease-in-out 1s forwards,
+          text-sparkle 2s ease-in-out 2.5s forwards,
+          text-exit 1s ease-in-out 7s forwards;
+      }
+      .text1 {
+        animation: text-animation 1s ease-in-out 1.2s forwards,
+          text-sparkle 2s ease-in-out 2.7s forwards,
+          text-exit 1s ease-in-out 7.2s forwards;
+      }
+      .text2 {
+        animation: text-animation 1s ease-in-out 1.4s forwards,
+          text-sparkle 2s ease-in-out 2.9s forwards,
+          text-exit 1s ease-in-out 7.4s forwards;
+      }
+      .text3 {
+        animation: text-animation 1s ease-in-out 1.6s forwards,
+          text-sparkle 2s ease-in-out 3.1s forwards,
+          text-exit 1s ease-in-out 7.6s forwards;
+      }
+      .text4 {
+        animation: text-animation 1s ease-in-out 1.8s forwards,
+          text-sparkle 2s ease-in-out 3.3s forwards,
+          text-exit 1s ease-in-out 7.8s forwards;
+      }
+      .text5 {
+        animation: text-animation 1s ease-in-out 2s forwards,
+          text-sparkle 2s ease-in-out 3.5s forwards,
+          text-exit 1s ease-in-out 8s forwards;
+      }
+      .text6 {
+        animation: text-animation 1s ease-in-out 2.2s forwards,
+          text-sparkle 2s ease-in-out 3.7s forwards,
+          text-exit 1s ease-in-out 8.2s forwards;
+      }
+      .text7 {
+        animation: text-animation 1s ease-in-out 2.4s forwards,
+          text-sparkle 2s ease-in-out 3.9s forwards,
+          text-exit-special 2s ease-in-out 8.4s forwards;
+      }
 
-  <!-- SVG Background -->
-  <div id="bg-wrap">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <radialGradient id="Gradient1" cx="50%" cy="50%" fx="0.441602%" fy="50%" r=".5">
-          <animate attributeName="fx" dur="34s" values="0%;3%;0%" repeatCount="indefinite"/>
-          <stop offset="0%" stop-color="rgba(255, 0, 255, 1)"/>
-          <stop offset="100%" stop-color="rgba(255, 0, 255, 0)"/>
-        </radialGradient>
-        <radialGradient id="Gradient2" cx="50%" cy="50%" fx="2.68147%" fy="50%" r=".5">
-          <animate attributeName="fx" dur="23.5s" values="0%;3%;0%" repeatCount="indefinite"/>
-          <stop offset="0%" stop-color="rgba(255, 255, 0, 1)"/>
-          <stop offset="100%" stop-color="rgba(255, 255, 0, 0)"/>
-        </radialGradient>
-        <radialGradient id="Gradient3" cx="50%" cy="50%" fx="0.836536%" fy="50%" r=".5">
-          <animate attributeName="fx" dur="21.5s" values="0%;3%;0%" repeatCount="indefinite"/>
-          <stop offset="0%" stop-color="rgba(0, 255, 255, 1)"/>
-          <stop offset="100%" stop-color="rgba(0, 255, 255, 0)"/>
-        </radialGradient>
-        <!-- Add Gradients 4–6 here if desired -->
-      </defs>
-      <!-- animated rectangles -->
-      <rect x="13.744%" y="1.18473%" width="100%" height="100%" fill="url(#Gradient1)" transform="rotate(334.41 50 50)">
-        <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite"/>
-        <animate attributeName="y" dur="21s" values="0%;25%;0%" repeatCount="indefinite"/>
-        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="7s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="-2.17916%" y="35.4267%" width="100%" height="100%" fill="url(#Gradient2)" transform="rotate(255.072 50 50)">
-        <animate attributeName="x" dur="23s" values="-25%;0%;-25%" repeatCount="indefinite"/>
-        <animate attributeName="y" dur="24s" values="0%;50%;0%" repeatCount="indefinite"/>
-        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="12s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="9.00483%" y="14.5733%" width="100%" height="100%" fill="url(#Gradient3)" transform="rotate(139.903 50 50)">
-        <animate attributeName="x" dur="25s" values="0%;25%;0%" repeatCount="indefinite"/>
-        <animate attributeName="y" dur="12s" values="0%;25%;0%" repeatCount="indefinite"/>
-        <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="9s" repeatCount="indefinite"/>
-      </rect>
-    </svg>
-  </div>
+      /* Text scale animations */
+      @keyframes text-animation {
+        0% {
+          transform: scale(0, 0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(3, 3);
+        }
+        100% {
+          transform: scale(1, 1);
+          opacity: 1;
+        }
+      }
 
+      /* Text sparkling effect */
+      @keyframes text-sparkle {
+        0%,
+        100% {
+          text-shadow: none;
+        }
+        25% {
+          text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b;
+        }
+        50% {
+          text-shadow: 0 0 10px #4ecdc4, 0 0 20px #4ecdc4, 0 0 30px #4ecdc4;
+        }
+        75% {
+          text-shadow: 0 0 10px #45b7d1, 0 0 20px #45b7d1, 0 0 30px #45b7d1;
+        }
+      }
 
+      /* Text exit animations */
+      @keyframes text-exit {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.3) translateY(-30px) rotate(180deg);
+        }
+      }
 
+      @keyframes text-exit-special {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(2) rotate(90deg);
+        }
+        50% {
+          transform: scale(1.5) rotate(180deg);
+        }
+        75% {
+          transform: scale(2.5) rotate(270deg);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0) rotate(360deg) translateX(500px);
+        }
+      }
 
+      /* Frame bounce effects */
+      .frame {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        opacity: 0;
+      }
 
+      .frame0 {
+        left: -140px;
+        top: 0;
+        background-color: hsl(0, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 0ms forwards;
+      }
+      .frame1 {
+        left: -100px;
+        top: 0;
+        background-color: hsl(45, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 200ms forwards;
+      }
+      .frame2 {
+        left: -60px;
+        top: 0;
+        background-color: hsl(90, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 400ms forwards;
+      }
+      .frame3 {
+        left: -20px;
+        top: 0;
+        background-color: hsl(135, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 600ms forwards;
+      }
+      .frame4 {
+        left: 20px;
+        top: 0;
+        background-color: hsl(180, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 800ms forwards;
+      }
+      .frame5 {
+        left: 60px;
+        top: 0;
+        background-color: hsl(225, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 1000ms forwards;
+      }
+      .frame6 {
+        left: 100px;
+        top: 0;
+        background-color: hsl(270, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 1200ms forwards;
+      }
+      .frame7 {
+        left: 140px;
+        top: 0;
+        background-color: hsl(315, 80%, 60%);
+        animation: frame-animation 1s ease-in-out 1400ms forwards;
+      }
 
+      @keyframes frame-animation {
+        0% {
+          transform: translateY(-500px);
+          opacity: 1;
+          box-shadow: 0 0 20px currentColor;
+        }
+        50% {
+          box-shadow: 0 0 40px currentColor, 0 0 60px currentColor;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 0;
+        }
+      }
 
+      /* COLORFUL PARTICLE EXPLOSION EFFECTS - THE MISSING BOOM! */
+      .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        opacity: 0;
+        z-index: 5;
+      }
 
+      /* Create 12 particles per letter for explosive effect */
+      .particle00,
+      .particle01,
+      .particle02,
+      .particle03,
+      .particle04,
+      .particle05,
+      .particle06,
+      .particle07,
+      .particle08,
+      .particle09,
+      .particle010,
+      .particle011 {
+        background-color: hsl(0, 80%, 60%);
+        left: -140px;
+        top: 0;
+      }
 
+      .particle10,
+      .particle11,
+      .particle12,
+      .particle13,
+      .particle14,
+      .particle15,
+      .particle16,
+      .particle17,
+      .particle18,
+      .particle19,
+      .particle110,
+      .particle111 {
+        background-color: hsl(45, 80%, 60%);
+        left: -100px;
+        top: 0;
+      }
 
+      .particle20,
+      .particle21,
+      .particle22,
+      .particle23,
+      .particle24,
+      .particle25,
+      .particle26,
+      .particle27,
+      .particle28,
+      .particle29,
+      .particle210,
+      .particle211 {
+        background-color: hsl(90, 80%, 60%);
+        left: -60px;
+        top: 0;
+      }
 
+      .particle30,
+      .particle31,
+      .particle32,
+      .particle33,
+      .particle34,
+      .particle35,
+      .particle36,
+      .particle37,
+      .particle38,
+      .particle39,
+      .particle310,
+      .particle311 {
+        background-color: hsl(135, 80%, 60%);
+        left: -20px;
+        top: 0;
+      }
 
+      .particle40,
+      .particle41,
+      .particle42,
+      .particle43,
+      .particle44,
+      .particle45,
+      .particle46,
+      .particle47,
+      .particle48,
+      .particle49,
+      .particle410,
+      .particle411 {
+        background-color: hsl(180, 80%, 60%);
+        left: 20px;
+        top: 0;
+      }
 
+      .particle50,
+      .particle51,
+      .particle52,
+      .particle53,
+      .particle54,
+      .particle55,
+      .particle56,
+      .particle57,
+      .particle58,
+      .particle59,
+      .particle510,
+      .particle511 {
+        background-color: hsl(225, 80%, 60%);
+        left: 60px;
+        top: 0;
+      }
 
+      .particle60,
+      .particle61,
+      .particle62,
+      .particle63,
+      .particle64,
+      .particle65,
+      .particle66,
+      .particle67,
+      .particle68,
+      .particle69,
+      .particle610,
+      .particle611 {
+        background-color: hsl(270, 80%, 60%);
+        left: 100px;
+        top: 0;
+      }
 
+      .particle70,
+      .particle71,
+      .particle72,
+      .particle73,
+      .particle74,
+      .particle75,
+      .particle76,
+      .particle77,
+      .particle78,
+      .particle79,
+      .particle710,
+      .particle711 {
+        background-color: hsl(315, 80%, 60%);
+        left: 140px;
+        top: 0;
+      }
 
+      /* EXPLOSION ANIMATION TIMING - Creates the BOOM effect */
+      .particle00,
+      .particle10,
+      .particle20,
+      .particle30,
+      .particle40,
+      .particle50,
+      .particle60,
+      .particle70 {
+        animation: explode-up 2s ease-out 1.5s forwards;
+      }
+      .particle01,
+      .particle11,
+      .particle21,
+      .particle31,
+      .particle41,
+      .particle51,
+      .particle61,
+      .particle71 {
+        animation: explode-down 2s ease-out 1.6s forwards;
+      }
+      .particle02,
+      .particle12,
+      .particle22,
+      .particle32,
+      .particle42,
+      .particle52,
+      .particle62,
+      .particle72 {
+        animation: explode-left 2s ease-out 1.7s forwards;
+      }
+      .particle03,
+      .particle13,
+      .particle23,
+      .particle33,
+      .particle43,
+      .particle53,
+      .particle63,
+      .particle73 {
+        animation: explode-right 2s ease-out 1.8s forwards;
+      }
+      .particle04,
+      .particle14,
+      .particle24,
+      .particle34,
+      .particle44,
+      .particle54,
+      .particle64,
+      .particle74 {
+        animation: explode-up-left 2s ease-out 1.9s forwards;
+      }
+      .particle05,
+      .particle15,
+      .particle25,
+      .particle35,
+      .particle45,
+      .particle55,
+      .particle65,
+      .particle75 {
+        animation: explode-up-right 2s ease-out 2s forwards;
+      }
+      .particle06,
+      .particle16,
+      .particle26,
+      .particle36,
+      .particle46,
+      .particle56,
+      .particle66,
+      .particle76 {
+        animation: explode-down-left 2s ease-out 2.1s forwards;
+      }
+      .particle07,
+      .particle17,
+      .particle27,
+      .particle37,
+      .particle47,
+      .particle57,
+      .particle67,
+      .particle77 {
+        animation: explode-down-right 2s ease-out 2.2s forwards;
+      }
+      .particle08,
+      .particle18,
+      .particle28,
+      .particle38,
+      .particle48,
+      .particle58,
+      .particle68,
+      .particle78 {
+        animation: explode-spiral 2s ease-out 2.3s forwards;
+      }
+      .particle09,
+      .particle19,
+      .particle29,
+      .particle39,
+      .particle49,
+      .particle59,
+      .particle69,
+      .particle79 {
+        animation: explode-spiral-reverse 2s ease-out 2.4s forwards;
+      }
+      .particle010,
+      .particle110,
+      .particle210,
+      .particle310,
+      .particle410,
+      .particle510,
+      .particle610,
+      .particle710 {
+        animation: explode-bounce 2s ease-out 2.5s forwards;
+      }
+      .particle011,
+      .particle111,
+      .particle211,
+      .particle311,
+      .particle411,
+      .particle511,
+      .particle611,
+      .particle711 {
+        animation: explode-zoom 2s ease-out 2.6s forwards;
+      }
 
+      /* PARTICLE EXPLOSION KEYFRAMES - The spectacular effects! */
+      @keyframes explode-up {
+        0% {
+          opacity: 0;
+          transform: scale(0) translateY(0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translateY(-20px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translateY(-120px) rotate(360deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Benil Jenish Mon Portfolio</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: auto;  /* allow scrollbars again */
-    }
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;
-    }
-    footer {
-      text-align: center;
-      margin-top: auto;
-      padding: 1rem 0;
-    }
-     /* css/style.css */
+      @keyframes explode-down {
+        0% {
+          opacity: 0;
+          transform: scale(0) translateY(0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translateY(20px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translateY(120px) rotate(-360deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
-    .hero {
-      height: 100vh;
-      min-height: 100vh;
-      width: 100vw;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start; /* Move content towards the top */
-      align-items: center;
-      padding-top: 0rem; /* Add space from the top */
-    }
-    .hero h1 {
-      margin-bottom: 1rem;
-      font-size: 3rem;
-    }
-    .hero p {
-      margin-bottom: 0;
-      font-size: 1.5rem;
-    }
-    .portfolio-grid {
-      margin-top: 0;
-      padding-top: 4rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
+      @keyframes explode-left {
+        0% {
+          opacity: 0;
+          transform: scale(0) translateX(0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translateX(-20px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translateX(-120px) rotate(360deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
-    <div class="logo-container">
-  <div class="ball"></div>
-  <span class="logo-text">&lt;/&gt;Benil</span>
+      @keyframes explode-right {
+        0% {
+          opacity: 0;
+          transform: scale(0) translateX(0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translateX(20px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translateX(120px) rotate(-360deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
+      @keyframes explode-up-left {
+        0% {
+          opacity: 0;
+          transform: scale(0) translate(0, 0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translate(-15px, -15px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translate(-100px, -100px) rotate(270deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
-</div>
-     <ul class="sans-nav">
-  <li><a href="#work">Projects</a></li>
-  <li><a href="#about">About</a></li>
-  <li><a href="#contact">Contact</a></li>
-</ul>
-    </nav>
-  </header>
- <div class="hero">
-  <h1 class="hero-title">Hello, I’m Benil Jenish Mon</h1>
-  <p class="hero-desc">Design & Development & Financial Analyst</p>
-</div>
+      @keyframes explode-up-right {
+        0% {
+          opacity: 0;
+          transform: scale(0) translate(0, 0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translate(15px, -15px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translate(100px, -100px) rotate(-270deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
+      @keyframes explode-down-left {
+        0% {
+          opacity: 0;
+          transform: scale(0) translate(0, 0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translate(-15px, 15px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translate(-100px, 100px) rotate(270deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
 
-  <main>
-    <section id="work" class="portfolio-grid">
-      <!-- Portfolio projects go here -->
-      <div class="project-card">
-        <img 
-  src="C:\Users\benil\Downloads\resume\1test\assets\vecteezy_website-programming-and-coding-development_48879499.png" 
-  alt="Project"
-  width="50" 
->
-    <h2>Personal Task Manager Web App with Smart Reminders (Python + React + AI Touch):</h2>
-        <p>Built a full-stack task management app using React.js, Flask, and MySQL. Implemented REST APIs, natural language reminders, and automatic task categorization. Delivered a clean, responsive UI with smart, AI-inspired features for an intuitive user experience.</p>
+      @keyframes explode-down-right {
+        0% {
+          opacity: 0;
+          transform: scale(0) translate(0, 0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.5) translate(15px, 15px);
+          box-shadow: 0 0 15px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) translate(100px, 100px) rotate(-270deg);
+          box-shadow: 0 0 30px currentColor;
+        }
+      }
+
+      @keyframes explode-spiral {
+        0% {
+          opacity: 0;
+          transform: scale(0) rotate(0deg) translate(0px, 0px);
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.2) rotate(72deg) translate(30px, 0px);
+        }
+        40% {
+          opacity: 0.8;
+          transform: scale(1) rotate(144deg) translate(50px, 0px);
+        }
+        60% {
+          opacity: 0.6;
+          transform: scale(0.8) rotate(216deg) translate(70px, 0px);
+        }
+        80% {
+          opacity: 0.4;
+          transform: scale(0.6) rotate(288deg) translate(90px, 0px);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) rotate(360deg) translate(120px, 0px);
+        }
+      }
+
+      @keyframes explode-spiral-reverse {
+        0% {
+          opacity: 0;
+          transform: scale(0) rotate(0deg) translate(0px, 0px);
+        }
+        20% {
+          opacity: 1;
+          transform: scale(1.2) rotate(-72deg) translate(-30px, 0px);
+        }
+        40% {
+          opacity: 0.8;
+          transform: scale(1) rotate(-144deg) translate(-50px, 0px);
+        }
+        60% {
+          opacity: 0.6;
+          transform: scale(0.8) rotate(-216deg) translate(-70px, 0px);
+        }
+        80% {
+          opacity: 0.4;
+          transform: scale(0.6) rotate(-288deg) translate(-90px, 0px);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.2) rotate(-360deg) translate(-120px, 0px);
+        }
+      }
+
+      @keyframes explode-bounce {
+        0% {
+          opacity: 0;
+          transform: scale(0) translateY(0);
+        }
+        25% {
+          opacity: 1;
+          transform: scale(1.5) translateY(-40px);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.2) translateY(20px);
+        }
+        75% {
+          opacity: 0.5;
+          transform: scale(0.9) translateY(-60px);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.3) translateY(100px);
+        }
+      }
+
+      @keyframes explode-zoom {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+          box-shadow: 0 0 0 currentColor;
+        }
+        10% {
+          opacity: 1;
+          transform: scale(2);
+          box-shadow: 0 0 20px currentColor;
+        }
+        30% {
+          opacity: 0.9;
+          transform: scale(3);
+          box-shadow: 0 0 40px currentColor;
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(4);
+          box-shadow: 0 0 60px currentColor;
+        }
+        70% {
+          opacity: 0.5;
+          transform: scale(5);
+          box-shadow: 0 0 80px currentColor;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(6);
+          box-shadow: 0 0 100px currentColor;
+        }
+      }
+
+      /* Skip instruction */
+      .skip-text {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #666;
+        font-size: 14px;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.6;
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) scale(1.05);
+        }
+      }
+
+      /* Main content */
+      .main-content {
+        opacity: 0;
+        display: none;
+        animation: autoShowContent 9s ease-in-out forwards;
+      }
+
+      @keyframes autoShowContent {
+        0%,
+        88% {
+          opacity: 0;
+          display: none;
+        }
+        100% {
+          opacity: 1;
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Loading Animation Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <!-- Background color bars -->
+      <div class="background background0"></div>
+      <div class="background background1"></div>
+      <div class="background background2"></div>
+      <div class="background background3"></div>
+      <div class="background background4"></div>
+      <div class="background background5"></div>
+      <div class="background background6"></div>
+      <div class="background background7"></div>
+
+      <!-- Animation container -->
+      <div class="criterion">
+        <!-- Welcome text letters -->
+        <div class="text text0">W</div>
+        <div class="text text1">e</div>
+        <div class="text text2">l</div>
+        <div class="text text3">c</div>
+        <div class="text text4">o</div>
+        <div class="text text5">m</div>
+        <div class="text text6">e</div>
+        <div class="text text7">:)</div>
+
+        <!-- Frame bounce effects -->
+        <div class="frame frame0"></div>
+        <div class="frame frame1"></div>
+        <div class="frame frame2"></div>
+        <div class="frame frame3"></div>
+        <div class="frame frame4"></div>
+        <div class="frame frame5"></div>
+        <div class="frame frame6"></div>
+        <div class="frame frame7"></div>
+
+        <!-- COLORFUL PARTICLE EXPLOSION EFFECTS - THE BOOM! -->
+        <!-- W particles -->
+        <div class="particle particle00"></div>
+        <div class="particle particle01"></div>
+        <div class="particle particle02"></div>
+        <div class="particle particle03"></div>
+        <div class="particle particle04"></div>
+        <div class="particle particle05"></div>
+        <div class="particle particle06"></div>
+        <div class="particle particle07"></div>
+        <div class="particle particle08"></div>
+        <div class="particle particle09"></div>
+        <div class="particle particle010"></div>
+        <div class="particle particle011"></div>
+
+        <!-- e particles -->
+        <div class="particle particle10"></div>
+        <div class="particle particle11"></div>
+        <div class="particle particle12"></div>
+        <div class="particle particle13"></div>
+        <div class="particle particle14"></div>
+        <div class="particle particle15"></div>
+        <div class="particle particle16"></div>
+        <div class="particle particle17"></div>
+        <div class="particle particle18"></div>
+        <div class="particle particle19"></div>
+        <div class="particle particle110"></div>
+        <div class="particle particle111"></div>
+
+        <!-- l particles -->
+        <div class="particle particle20"></div>
+        <div class="particle particle21"></div>
+        <div class="particle particle22"></div>
+        <div class="particle particle23"></div>
+        <div class="particle particle24"></div>
+        <div class="particle particle25"></div>
+        <div class="particle particle26"></div>
+        <div class="particle particle27"></div>
+        <div class="particle particle28"></div>
+        <div class="particle particle29"></div>
+        <div class="particle particle210"></div>
+        <div class="particle particle211"></div>
+
+        <!-- c particles -->
+        <div class="particle particle30"></div>
+        <div class="particle particle31"></div>
+        <div class="particle particle32"></div>
+        <div class="particle particle33"></div>
+        <div class="particle particle34"></div>
+        <div class="particle particle35"></div>
+        <div class="particle particle36"></div>
+        <div class="particle particle37"></div>
+        <div class="particle particle38"></div>
+        <div class="particle particle39"></div>
+        <div class="particle particle310"></div>
+        <div class="particle particle311"></div>
+
+        <!-- o particles -->
+        <div class="particle particle40"></div>
+        <div class="particle particle41"></div>
+        <div class="particle particle42"></div>
+        <div class="particle particle43"></div>
+        <div class="particle particle44"></div>
+        <div class="particle particle45"></div>
+        <div class="particle particle46"></div>
+        <div class="particle particle47"></div>
+        <div class="particle particle48"></div>
+        <div class="particle particle49"></div>
+        <div class="particle particle410"></div>
+        <div class="particle particle411"></div>
+
+        <!-- m particles -->
+        <div class="particle particle50"></div>
+        <div class="particle particle51"></div>
+        <div class="particle particle52"></div>
+        <div class="particle particle53"></div>
+        <div class="particle particle54"></div>
+        <div class="particle particle55"></div>
+        <div class="particle particle56"></div>
+        <div class="particle particle57"></div>
+        <div class="particle particle58"></div>
+        <div class="particle particle59"></div>
+        <div class="particle particle510"></div>
+        <div class="particle particle511"></div>
+
+        <!-- e particles -->
+        <div class="particle particle60"></div>
+        <div class="particle particle61"></div>
+        <div class="particle particle62"></div>
+        <div class="particle particle63"></div>
+        <div class="particle particle64"></div>
+        <div class="particle particle65"></div>
+        <div class="particle particle66"></div>
+        <div class="particle particle67"></div>
+        <div class="particle particle68"></div>
+        <div class="particle particle69"></div>
+        <div class="particle particle610"></div>
+        <div class="particle particle611"></div>
+
+        <!-- :) particles -->
+        <div class="particle particle70"></div>
+        <div class="particle particle71"></div>
+        <div class="particle particle72"></div>
+        <div class="particle particle73"></div>
+        <div class="particle particle74"></div>
+        <div class="particle particle75"></div>
+        <div class="particle particle76"></div>
+        <div class="particle particle77"></div>
+        <div class="particle particle78"></div>
+        <div class="particle particle79"></div>
+        <div class="particle particle710"></div>
+        <div class="particle particle711"></div>
       </div>
-      <!-- Repeat for more projects -->
-    </section>
-    <section id="about" style="margin-top: 8rem;">
-  <h2 class="animate-charcter animate-vibrate" style="text-align:left; margin-left:3rem;">About Me</h2>
-  <p class="about-desc" style="margin-left: 3rem;">
-    I’m a motivated and detail-oriented professional with 2+ years of experience at IBM as a Financial Analyst, now transitioning into AI/ML and software development. With hands-on experience building full-stack web applications using Python (Flask) and React.js, I’ve developed skills in API integration, MySQL databases, and responsive UI design. I’ve also worked on foundational machine learning and chatbot projects, driven by a passion to create intelligent, impactful solutions. I’m eager to contribute to innovative teams where I can apply my Python, data, and development skills to solve real-world problems through technology.
-  </p>
-</section>
+    </div>
 
-<section id="contact" style="margin-top: 8rem;">
-  <h2 class="animate-charcter animate-vibrate" style="text-align:left; margin-left:3rem;">Contact</h2>
-<div style="margin-left: 3rem; font-size: 1rem;">
- <a href="mailto:beniljenish@gmail.com" class="contact-link email-link">EMAIL</a>
-&nbsp;&nbsp;
-<a href="https://www.linkedin.com/in/benil-jenish/" target="_blank" class="contact-link linkedin-link">LINKEDIN</a>
-&nbsp;&nbsp;
-<a href="tel:+918220727721" class="contact-link mobile-link">MOBILE</a>
-</div>
-</section>
-  </main>
-  <footer>
-  <p class="comic-footer">© 2025 Benil Jenish Mon. All rights reserved.</p>
-</footer>
-  <script src="https://unpkg.com/gsap/dist/gsap.min.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Your Page Title</title>
+        <style>
+          /* 1) Reset body/html */
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* hide scrollbars if desired */
+          }
+          /* 2) Full-screen SVG background */
+          #bg-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* behind everything */
+            pointer-events: none; /* clicks pass through */
+          }
+          #bg-wrap svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
+          /* 3) Foreground content container */
+          #content-wrap {
+            position: relative;
+            z-index: 1;
+            /* optional: scroll if content overflows */
+            overflow: auto;
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+      </head>
+      <body>
+        <!-- SVG Background -->
+        <div id="bg-wrap">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient
+                id="Gradient1"
+                cx="50%"
+                cy="50%"
+                fx="0.441602%"
+                fy="50%"
+                r=".5"
+              >
+                <animate
+                  attributeName="fx"
+                  dur="34s"
+                  values="0%;3%;0%"
+                  repeatCount="indefinite"
+                />
+                <stop offset="0%" stop-color="rgba(255, 0, 255, 1)" />
+                <stop offset="100%" stop-color="rgba(255, 0, 255, 0)" />
+              </radialGradient>
+              <radialGradient
+                id="Gradient2"
+                cx="50%"
+                cy="50%"
+                fx="2.68147%"
+                fy="50%"
+                r=".5"
+              >
+                <animate
+                  attributeName="fx"
+                  dur="23.5s"
+                  values="0%;3%;0%"
+                  repeatCount="indefinite"
+                />
+                <stop offset="0%" stop-color="rgba(255, 255, 0, 1)" />
+                <stop offset="100%" stop-color="rgba(255, 255, 0, 0)" />
+              </radialGradient>
+              <radialGradient
+                id="Gradient3"
+                cx="50%"
+                cy="50%"
+                fx="0.836536%"
+                fy="50%"
+                r=".5"
+              >
+                <animate
+                  attributeName="fx"
+                  dur="21.5s"
+                  values="0%;3%;0%"
+                  repeatCount="indefinite"
+                />
+                <stop offset="0%" stop-color="rgba(0, 255, 255, 1)" />
+                <stop offset="100%" stop-color="rgba(0, 255, 255, 0)" />
+              </radialGradient>
+              <!-- Add Gradients 4–6 here if desired -->
+            </defs>
+            <!-- animated rectangles -->
+            <rect
+              x="13.744%"
+              y="1.18473%"
+              width="100%"
+              height="100%"
+              fill="url(#Gradient1)"
+              transform="rotate(334.41 50 50)"
+            >
+              <animate
+                attributeName="x"
+                dur="20s"
+                values="25%;0%;25%"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="y"
+                dur="21s"
+                values="0%;25%;0%"
+                repeatCount="indefinite"
+              />
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 50 50"
+                to="360 50 50"
+                dur="7s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            <rect
+              x="-2.17916%"
+              y="35.4267%"
+              width="100%"
+              height="100%"
+              fill="url(#Gradient2)"
+              transform="rotate(255.072 50 50)"
+            >
+              <animate
+                attributeName="x"
+                dur="23s"
+                values="-25%;0%;-25%"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="y"
+                dur="24s"
+                values="0%;50%;0%"
+                repeatCount="indefinite"
+              />
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 50 50"
+                to="360 50 50"
+                dur="12s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            <rect
+              x="9.00483%"
+              y="14.5733%"
+              width="100%"
+              height="100%"
+              fill="url(#Gradient3)"
+              transform="rotate(139.903 50 50)"
+            >
+              <animate
+                attributeName="x"
+                dur="25s"
+                values="0%;25%;0%"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="y"
+                dur="12s"
+                values="0%;25%;0%"
+                repeatCount="indefinite"
+              />
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="360 50 50"
+                to="0 50 50"
+                dur="9s"
+                repeatCount="indefinite"
+              />
+            </rect>
+          </svg>
+        </div>
+
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <title>Benil Jenish Mon Portfolio</title>
+            <link rel="stylesheet" href="css/style.css" />
+            <style>
+              html,
+              body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: auto; /* allow scrollbars again */
+              }
+              body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+              }
+              main {
+                flex: 1;
+              }
+              footer {
+                text-align: center;
+                margin-top: auto;
+                padding: 1rem 0;
+              }
+              /* css/style.css */
+
+              .hero {
+                height: 100vh;
+                min-height: 100vh;
+                width: 100vw;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; /* Move content towards the top */
+                align-items: center;
+                padding-top: 0rem; /* Add space from the top */
+              }
+              .hero h1 {
+                margin-bottom: 1rem;
+                font-size: 3rem;
+              }
+              .hero p {
+                margin-bottom: 0;
+                font-size: 1.5rem;
+              }
+              .portfolio-grid {
+                margin-top: 0;
+                padding-top: 4rem;
+              }
+            </style>
+          </head>
+          <body>
+            <header>
+              <nav>
+                <div class="logo-container">
+                  <div class="ball"></div>
+                  <span class="logo-text">&lt;/&gt;Benil</span>
+                </div>
+                <ul class="sans-nav">
+                  <li><a href="#work">Projects</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                </ul>
+              </nav>
+            </header>
+            <div class="hero">
+              <h1 class="hero-title">Hello, I’m Benil Jenish Mon</h1>
+              <p class="hero-desc">Design & Development & Financial Analyst</p>
+            </div>
+
+            <main>
+              <section id="work" class="portfolio-grid">
+                <!-- Portfolio projects go here -->
+                <div class="project-card">
+                  <img
+                    src="./assets/vecteezy_website-programming-and-coding-development_48879499.png"
+                    alt="Project"
+                    width="50"
+                  />
+                  <h2>
+                    Personal Task Manager Web App with Smart Reminders (Python +
+                    React + AI Touch):
+                  </h2>
+                  <p>
+                    Built a full-stack task management app using React.js,
+                    Flask, and MySQL. Implemented REST APIs, natural language
+                    reminders, and automatic task categorization. Delivered a
+                    clean, responsive UI with smart, AI-inspired features for an
+                    intuitive user experience.
+                  </p>
+                </div>
+                <!-- Repeat for more projects -->
+              </section>
+              <section id="about" style="margin-top: 8rem">
+                <h2
+                  class="animate-charcter animate-vibrate"
+                  style="text-align: left; margin-left: 3rem"
+                >
+                  About Me
+                </h2>
+                <p class="about-desc" style="margin-left: 3rem">
+                  I’m a motivated and detail-oriented professional with 2+ years
+                  of experience at IBM as a Financial Analyst, now transitioning
+                  into AI/ML and software development. With hands-on experience
+                  building full-stack web applications using Python (Flask) and
+                  React.js, I’ve developed skills in API integration, MySQL
+                  databases, and responsive UI design. I’ve also worked on
+                  foundational machine learning and chatbot projects, driven by
+                  a passion to create intelligent, impactful solutions. I’m
+                  eager to contribute to innovative teams where I can apply my
+                  Python, data, and development skills to solve real-world
+                  problems through technology.
+                </p>
+              </section>
+
+              <section id="contact" style="margin-top: 8rem">
+                <h2
+                  class="animate-charcter animate-vibrate"
+                  style="text-align: left; margin-left: 3rem"
+                >
+                  Contact
+                </h2>
+                <div style="margin-left: 3rem; font-size: 1rem">
+                  <a
+                    href="mailto:beniljenish@gmail.com"
+                    class="contact-link email-link"
+                    >EMAIL</a
+                  >
+                  &nbsp;&nbsp;
+                  <a
+                    href="https://www.linkedin.com/in/benil-jenish/"
+                    target="_blank"
+                    class="contact-link linkedin-link"
+                    >LINKEDIN</a
+                  >
+                  &nbsp;&nbsp;
+                  <a href="tel:+918220727721" class="contact-link mobile-link"
+                    >MOBILE</a
+                  >
+                </div>
+              </section>
+            </main>
+            <footer>
+              <p class="comic-footer">
+                © 2025 Benil Jenish Mon. All rights reserved.
+              </p>
+            </footer>
+            <script src="https://unpkg.com/gsap/dist/gsap.min.js"></script>
+            <script src="js/main.js"></script>
+          </body>
+        </html>
+      </body>
+    </html>
+  </body>
 </html>
-
