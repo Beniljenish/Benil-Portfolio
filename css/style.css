@@ -19,9 +19,9 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.25rem 4rem;
+  padding: 0.25rem 2rem;
   flex-wrap: wrap;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -204,7 +204,7 @@ a {
 .email-link,
 .linkedin-link,
 .mobile-link {
-  color: #1310c5;
+  color: #d61b1b;
   font-weight: 700;
   font-size: 0.9rem; /* ↓ */
 }
@@ -216,3 +216,4 @@ a {
     margin-right: 1rem;
   }
 }
+
