@@ -1,31 +1,42 @@
 * {
   font-family: monospace !important;
+  box-sizing: border-box;
 }
-body {
+
+html, body {
   font-family: monospace;
-  font-size: 18px; /* ← increase from default 16px */
+  font-size: 14px;
   color: #232323;
   background: #f5f6fa;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: hidden; /* 🔒 Prevent horizontal scroll */
+  width: 100%;
+  max-width: 100%;
 }
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.25rem 4rem; /* Less top padding: moves nav higher */
+  padding: 0.25rem 4rem;
+  flex-wrap: wrap;
+  overflow-x: auto;
 }
 
 .logo {
-  width: 80px; /* Increase width */
-  height: auto; /* Maintain aspect ratio */
+  width: 80px;
+  height: auto;
 }
+
 nav ul {
   list-style: none;
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem; /* ↓ */
 }
+
 nav a {
   color: #232323;
   background: none;
@@ -33,9 +44,10 @@ nav a {
   -webkit-text-fill-color: unset;
   transition: color 0.3s;
 }
+
 nav a:hover,
 nav a:focus {
-  color: transparent;  /* Hide the single color */
+  color: transparent;
   background-image: linear-gradient(90deg, #0e058d, #42d36e);
   background-size: 200% auto;
   background-clip: text;
@@ -45,54 +57,65 @@ nav a:focus {
   transition: background-position 0.4s cubic-bezier(.4,0,.2,1), color 0.3s;
 }
 
-
 .hero {
   text-align: center;
-  margin: 2rem 0 2rem 0; /* Top and bottom margin */
-  padding-top: 0; /* or a small value if needed */
-  /* Keep other properties as is */
-}
-.hero {
-  padding-top: 8rem; /* Increase this value to move the text further down */
+  margin: 1rem 0;
+  padding-top: 5rem;
 }
 
 .hero h1 {
-  margin-top: 8rem; /* Optional: extra space for the heading */
+  margin-top: 8rem;
+  font-size: 2rem; /* ↓ */
 }
 
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
-  padding: 2rem 4rem;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+
 .project-card {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.07);
   padding: 1.5rem;
   transition: transform 0.2s, box-shadow 0.3s;
+  text-align: justify;
+  font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
+  font-size: 0.9rem;  /* ↓ */
+  color: #232323;
+  line-height: 1.5;   /* ↓ slightly */
+  cursor: pointer;
 }
+
 .project-card:hover {
-  transform: scale(1.02);
   transform: translateY(-10px) scale(1.03);
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 a {
   text-decoration: none;
 }
 
-
-
 .logo {
-  width: 5px;   /* Increased width */
-  height: 5px;   /* Maintains aspect ratio */
+  width: 5px;
+  height: 5px;
 }
 
 .logo-container {
   position: relative;
-  width: 250px;       /* Container is narrower */
-  height: 80px;       /* Container is less tall */
+  width: 250px;
+  height: 80px;
   display: flex;
   align-items: center;
 }
@@ -101,7 +124,7 @@ a {
   position: absolute;
   top: 12px;
   left: 0;
-  width: 40px;        /* Smaller diameter */
+  width: 40px;
   height: 40px;
   background: #0e058d;
   border-radius: 50%;
@@ -111,19 +134,19 @@ a {
 }
 
 .logo-text {
-font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
+  font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
   position: absolute;
   top: 25px;
-  left: 5px;         /* Ball and logo text start closer */
-  width: 100px;       /* Shorter reveal distance */
-  font-size: 1.3rem;  /* Smaller text */
+  left: 5px;
+  width: 100px;
+  font-size: 1rem; /* ↓ */
   font-weight: bold;
   color: #353535;
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
   animation: logoreveal 3s infinite alternate;
-  font-family: 'Inter', Arial, sans-serif;
+  letter-spacing: 0.5px; /* ↓ */
 }
 
 @keyframes ballmove {
@@ -141,87 +164,55 @@ font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
   100% { width: 150px; }
 }
 
-nav ul {
-  font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
-}
-
 .about-desc {
-   text-align: justify;
- 
-  font-size: 1.1rem;
-  line-height: 1.7;
+  text-align: justify;
+  font-size: 0.9rem;
+  line-height: 1.5;
   color: #232323;
-  max-width: 1315px;        /* Prevents it from being too wide on large screens */
-  margin: 0 auto 0 3rem;   /* Keeps your existing left margin for desktop */
-  /* or use: margin: 0 auto; to center fully with no fixed left margin */
+  max-width: 100%;
+  margin-left: 1rem;      /* Starts slightly from the left */
+  margin-right: 2rem;     /* Ends 2rem before the right edge */
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .contact-link {
-  font-family: 'Copperplate', 'Copperplate Gothic Light', serif; /* Change to your preferred font family */
-  font-size: 1rem;           /* Optional: adjust as you like */
-  font-weight: 600;          /* Optional: makes links bolder */
-  letter-spacing: 0.5px;     /* Optional: a little breathing room */
+  font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
+  font-size: 0.9rem;  /* ↓ */
+  font-weight: 600;
+  letter-spacing: 0.4px; /* ↓ */
 }
 
 .comic-footer {
-   
   font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-}
-.project-card {
-  text-align: justify; 
-  font-family: 'Copperplate', 'Copperplate Gothic Light', serif;
-  font-size: 1.04rem;      /* Optional: helps normalize sizes */
-  color: #232323;          /* Optional: readable dark text */
-  line-height: 1.65;       /* Optional: for comfortable reading */
-}
-
-.logo-text {
-  font-family: 'Copperplate', 'Copperplate Gothic Light', serif; /* Or any font you prefer */
-  font-size: 1.3rem;           /* Adjust size as needed */
-  font-weight: bold;           /* Keeps the logo visually strong */
-  letter-spacing: 1px;         /* Optional: adds spacing for clarity */
-  color: #353535;              /* Adjust color as desired */
+  font-size: 0.9rem;  /* ↓ */
 }
 
 .hero-title {
-  font-size: 36px;
+  font-size: 1.8rem;  /* ↓ */
   font-weight: bold;
   margin-bottom: 10px;
-  color: #0e058d; /* Replace with any color you want */
+  color: #0e058d;
 }
+
 .hero-description {
-  font-size: 20px; /* or try 22px or 1.25rem */
+  font-size: 1rem;   /* ↓ */
   font-weight: normal;
   line-height: 1.5;
 }
-.email-link {
-  color: #1310c5;       /* Example: bold green for Email */
-  font-weight: 700;     /* Optional: makes "EMAIL" stand out */
-}
 
-.linkedin-link {
-  color: #1310c5;       /* Example: official LinkedIn blue */
-  font-weight: 700;
-}
-
+.email-link,
+.linkedin-link,
 .mobile-link {
-  color: #1310c5;       /* Example: a bold red for Mobile */
+  color: #1310c5;
   font-weight: 700;
+  font-size: 0.9rem; /* ↓ */
 }
+
 @media (max-width: 850px) {
   .about-desc {
-    max-width: 95vw;     /* Allows the text to resize within small viewport */
-    margin-left: 1rem;   /* Reduces left gap on smaller devices */
+    max-width: 95vw;
+    margin-left: 1rem;
     margin-right: 1rem;
   }
 }
-
-
-
-
-
-
-
-
-
-
